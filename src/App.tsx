@@ -1,7 +1,7 @@
 import { useState } from 'react'
 import { Button } from './components/ui/button'
 import { Card, CardContent } from './components/ui/card'
-import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from './components/ui/dialog'
+import { Dialog, DialogContent, DialogHeader, DialogTitle } from './components/ui/dialog'
 import { Input } from './components/ui/input'
 import { Label } from './components/ui/label'
 import { Textarea } from './components/ui/textarea'
@@ -102,13 +102,12 @@ function App() {
             <div className="flex items-center">
               <h1 className="text-2xl font-bold text-primary">Side Hustling</h1>
             </div>
-            <Dialog open={isScheduleOpen} onOpenChange={setIsScheduleOpen}>
-              <DialogTrigger asChild>
-                <Button className="bg-primary hover:bg-primary/90 text-white font-semibold">
-                  Schedule Free Call
-                </Button>
-              </DialogTrigger>
-            </Dialog>
+            <Button 
+              className="bg-primary hover:bg-primary/90 text-white font-semibold"
+              onClick={() => setIsScheduleOpen(true)}
+            >
+              Schedule Free Call
+            </Button>
           </div>
         </div>
       </nav>
@@ -130,13 +129,13 @@ function App() {
               Join thousands who've transformed their financial future.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-12">
-              <Dialog open={isScheduleOpen} onOpenChange={setIsScheduleOpen}>
-                <DialogTrigger asChild>
-                  <Button size="lg" className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 text-lg">
-                    Schedule Your Free Call Now
-                  </Button>
-                </DialogTrigger>
-              </Dialog>
+              <Button 
+                size="lg" 
+                className="bg-primary hover:bg-primary/90 text-white font-semibold px-8 py-4 text-lg"
+                onClick={() => setIsScheduleOpen(true)}
+              >
+                Schedule Your Free Call Now
+              </Button>
               <div className="flex items-center text-muted-foreground">
                 <CheckCircle className="h-5 w-5 text-accent mr-2" />
                 <span>No upfront costs • No hidden fees</span>
@@ -224,13 +223,14 @@ function App() {
           <p className="text-xl mb-8 opacity-90">
             Join our free consultation call and discover exactly how you can start earning $2-5k in the next 30 days.
           </p>
-          <Dialog open={isScheduleOpen} onOpenChange={setIsScheduleOpen}>
-            <DialogTrigger asChild>
-              <Button size="lg" variant="secondary" className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 text-lg">
-                Schedule Your Free Call Today
-              </Button>
-            </DialogTrigger>
-          </Dialog>
+          <Button 
+            size="lg" 
+            variant="secondary" 
+            className="bg-white text-primary hover:bg-white/90 font-semibold px-8 py-4 text-lg"
+            onClick={() => setIsScheduleOpen(true)}
+          >
+            Schedule Your Free Call Today
+          </Button>
           <p className="text-sm mt-4 opacity-75">
             No obligation • 100% free • Limited spots available
           </p>
@@ -271,13 +271,13 @@ function App() {
             <p className="text-white/70 mb-6">
               Empowering people to create sustainable income streams and achieve financial freedom.
             </p>
-            <Dialog open={isScheduleOpen} onOpenChange={setIsScheduleOpen}>
-              <DialogTrigger asChild>
-                <Button variant="outline" className="border-white text-white hover:bg-white hover:text-foreground">
-                  Schedule Free Consultation
-                </Button>
-              </DialogTrigger>
-            </Dialog>
+            <Button 
+              variant="outline" 
+              className="border-white text-white hover:bg-white hover:text-foreground"
+              onClick={() => setIsScheduleOpen(true)}
+            >
+              Schedule Free Consultation
+            </Button>
             <div className="mt-8 pt-8 border-t border-white/20">
               <p className="text-white/50 text-sm">
                 © 2024 Side Hustling. All rights reserved.
@@ -288,63 +288,65 @@ function App() {
       </footer>
 
       {/* Schedule Call Dialog */}
-      <DialogContent className="sm:max-w-md">
-        <DialogHeader>
-          <DialogTitle className="text-2xl font-bold text-center">
-            Schedule Your Free Consultation
-          </DialogTitle>
-        </DialogHeader>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <Label htmlFor="name">Full Name</Label>
-            <Input
-              id="name"
-              value={formData.name}
-              onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-              placeholder="Enter your full name"
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="email">Email Address</Label>
-            <Input
-              id="email"
-              type="email"
-              value={formData.email}
-              onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-              placeholder="Enter your email"
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="phone">Phone Number</Label>
-            <Input
-              id="phone"
-              type="tel"
-              value={formData.phone}
-              onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              placeholder="Enter your phone number"
-              required
-            />
-          </div>
-          <div>
-            <Label htmlFor="message">Tell us about your goals (optional)</Label>
-            <Textarea
-              id="message"
-              value={formData.message}
-              onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-              placeholder="What are you hoping to achieve?"
-              rows={3}
-            />
-          </div>
-          <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
-            Schedule My Free Call
-          </Button>
-          <p className="text-xs text-muted-foreground text-center">
-            We'll contact you within 24 hours to schedule your consultation.
-          </p>
-        </form>
-      </DialogContent>
+      <Dialog open={isScheduleOpen} onOpenChange={setIsScheduleOpen}>
+        <DialogContent className="sm:max-w-md">
+          <DialogHeader>
+            <DialogTitle className="text-2xl font-bold text-center">
+              Schedule Your Free Consultation
+            </DialogTitle>
+          </DialogHeader>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <div>
+              <Label htmlFor="name">Full Name</Label>
+              <Input
+                id="name"
+                value={formData.name}
+                onChange={(e) => setFormData({ ...formData, name: e.target.value })}
+                placeholder="Enter your full name"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="email">Email Address</Label>
+              <Input
+                id="email"
+                type="email"
+                value={formData.email}
+                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                placeholder="Enter your email"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="phone">Phone Number</Label>
+              <Input
+                id="phone"
+                type="tel"
+                value={formData.phone}
+                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                placeholder="Enter your phone number"
+                required
+              />
+            </div>
+            <div>
+              <Label htmlFor="message">Tell us about your goals (optional)</Label>
+              <Textarea
+                id="message"
+                value={formData.message}
+                onChange={(e) => setFormData({ ...formData, message: e.target.value })}
+                placeholder="What are you hoping to achieve?"
+                rows={3}
+              />
+            </div>
+            <Button type="submit" className="w-full bg-primary hover:bg-primary/90">
+              Schedule My Free Call
+            </Button>
+            <p className="text-xs text-muted-foreground text-center">
+              We'll contact you within 24 hours to schedule your consultation.
+            </p>
+          </form>
+        </DialogContent>
+      </Dialog>
     </div>
   )
 }
